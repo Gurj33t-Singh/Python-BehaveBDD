@@ -20,7 +20,7 @@ def multiPartEnc(DICT):
     returns: MultipartEncoder obj 
     dependacy: from requests_toolbelt import MultipartEncoder 
     """
-    return requests_toolbelt.MultiMultipartEncoder(fields=DICT)
+    return requests_toolbelt.MultipartEncoder(fields=DICT)
 
 
 def getIniConfig(PATH):

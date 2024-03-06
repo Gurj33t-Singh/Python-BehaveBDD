@@ -11,11 +11,13 @@ class RequestBuilder:
     params={}
 
     def __init__(self):
-        print(self.iniConf.sections())
-        self.URI=self.iniConf['API']['host']
+        self.url=self.iniConf['ENV']['host']
 
     def add_payload(self, JSON_PATH):    
         self.body=getJson(JSON_PATH)
+
+    def add_payload_dataclass(self, dataClassObj):    
+        self.body=dataClassObj.__dict__
 
     def add_header(self, HEADERS):
         self.headers=HEADERS
@@ -23,7 +25,7 @@ class RequestBuilder:
     def add_params(self, PARAMS):
         self.params=PARAMS
 
-    def callAPI(self, METHOD, API, URL, **kwargs):
+    def callAPI(self, METHOD, URL, API, **kwargs):
         """ 
         Calls API and gets raw response.
         Args: 
@@ -33,7 +35,7 @@ class RequestBuilder:
         Optional Args:
             Headers (dict): Headers
             Params (dict): Query parameters
-            Body (dict): Request body (json.dumps())
+            Body (json str): Request body (json.dumps())
         Returns:
             raw_response (requests obj): Raw response
         """
