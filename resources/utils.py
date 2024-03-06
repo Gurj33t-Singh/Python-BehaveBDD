@@ -30,7 +30,8 @@ def getIniConfig(PATH):
     returns: ConfigParser obj 
     dependacy: from configparser import ConfigParser 
     """
-    configs=ConfigParser.read(PATH)
+    configs=ConfigParser()
+    configs.read(PATH)
     return configs
 
 

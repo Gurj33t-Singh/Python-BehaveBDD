@@ -4,16 +4,15 @@ from resources.utils import *
 
 class RequestBuilder:
 
-    iniConf=utils.getIniConfig('DigitEnv.ini')
-    url
-    body
-    headers
-    params
-    # encoded_body=multiPartEnc(json_body)
-    # req_headers={"Content-Type": encoded_body.content_type, "authorization": "Basic ZWdvdi11c2VyLWNsaWVudDo="}
+    iniConf=getIniConfig('env.ini')
+    url=''
+    body={}
+    headers={}
+    params={}
 
     def __init__(self):
-        self.url=self.iniConf['ENV']['host']
+        print(self.iniConf.sections())
+        self.URI=self.iniConf['API']['host']
 
     def add_payload(self, JSON_PATH):    
         self.body=getJson(JSON_PATH)
@@ -24,13 +23,19 @@ class RequestBuilder:
     def add_params(self, PARAMS):
         self.params=PARAMS
 
-    def callAPI(METHOD, API, URL=self.url, **kwargs):
+    def callAPI(self, METHOD, API, URL, **kwargs):
         """ 
-        calls API and gets raw response
-        args: METHOD(str)post/get, API(str)
-        optional args: URL(str), Headers(kwarg), Params(kwarg), Body(kwarg) <- (json.dumps())
-        returns: raw_response(requests obj) 
-        dependacy: import requests
+        Calls API and gets raw response.
+        Args: 
+            METHOD (str): post/get
+            API (str): API endpoint
+            URL (str): Base URL
+        Optional Args:
+            Headers (dict): Headers
+            Params (dict): Query parameters
+            Body (dict): Request body (json.dumps())
+        Returns:
+            raw_response (requests obj): Raw response
         """
         if METHOD=='post':
             raw_response=requests.post(url=URL+API,
@@ -44,12 +49,3 @@ class RequestBuilder:
                                         params=kwargs['Params'])
         
         return raw_response
-
-"""     def getResponseVal(self, RESPONSE, KEY):
-        
-        Returns specific value for API response body
-        args: RESPONSE(Response Obj), KEY(str)
-        returns: value of provided key
-        note: require raw response from requests module
-        return RESPONSE.json().get(KEY) """
-
