@@ -1,0 +1,18 @@
+{
+    "payload": {
+        "username": "PTSU",
+        "password": "PTSU@123",
+        "grant_type": "PTSU",
+        "scope": "PTSU",
+        "tenantId": "PTSU",
+        "userType": "PTSU"
+    },
+    "errors": {
+        "error_codes": {
+            "invalidCredentials": ""
+        },
+        "error_messages": {
+            "invalidCredentials": ""
+        }
+    }
+}
