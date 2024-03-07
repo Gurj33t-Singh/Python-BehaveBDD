@@ -1,4 +1,4 @@
-{
+data = {
     "headers": {
         "authorization": "Basic ZWdvdi11c2VyLWNsaWVudDo="
     },
@@ -17,3 +17,9 @@
         }
     }
 }
+
+for k, v in data.items():
+    globals()[k]=v
+
+
+print(headers)
