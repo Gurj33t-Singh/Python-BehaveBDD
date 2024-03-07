@@ -26,9 +26,18 @@ dependencies:
   - xz=5.4.6=h5eee18b_0
   - zlib=1.2.13=h5eee18b_0
   - pip:
+      - allure-behave==2.13.2
+      - allure-python-commons==2.13.2
+      - attrs==23.2.0
+      - behave==1.2.6
       - certifi==2024.2.2
       - charset-normalizer==3.3.2
       - idna==3.6
+      - parse==1.20.1
+      - parse-type==0.6.2
+      - pluggy==1.4.0
       - requests==2.31.0
+      - requests-toolbelt==1.0.0
+      - six==1.16.0
       - urllib3==2.2.1
-prefix: /home/gurjeet/miniconda3/envs/egov
+prefix: /home/moolya/miniconda3/envs/egov
