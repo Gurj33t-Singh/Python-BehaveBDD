@@ -1,5 +1,5 @@
-from resources.utils import *
-from resources.reqUtils import RequestBuilder
+from resources import utils
+from resources.req_utils import RequestBuilder
 
 
 @given(u'Request object is ready')

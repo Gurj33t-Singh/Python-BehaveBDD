@@ -1,16 +1,16 @@
-from resources.reqUtils import RequestBuilder
-from resources.utils import *
-import json
-from requestPayload.mdmsv2 import SchemaSearchv1
-
-
+"""
+egov-user feature
+"""
+from resources import utils
+from Payload.egov_user import oauth_token
 
 @given('Prepare login payload with "{constants_key}" constants')
 def step_impl(context, constants_key):
-
-    # Prepared body
-    from requestPayload.egov_user import oauthToken
-    context.dataclass_body=oauthToken.AuthPayload(
+    """
+    Prepares egov-user oauth payload with constants value
+    """
+    # Prepared body with dataclass
+    context.dataclass_body=oauth_token.AuthPayload(
         username=context.constants_dict[constants_key]['username'],
         password=context.constants_dict[constants_key]['password'],
         tenantId=context.constants_dict[constants_key]['tenantId'],
@@ -18,8 +18,9 @@ def step_impl(context, constants_key):
         grant_type='password',
         scope='read'
     )
-    # Converted body to multipart 
-    context.multipart_body=multiPartEnc(context.dataclass_body.__dict__)
+
+    # Converted body to multipart
+    context.multipart_body=utils.multipart_encode(context.dataclass_body.__dict__)
 
     context.req_header={}
     context.req_param={}
