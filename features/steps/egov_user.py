@@ -2,7 +2,7 @@
 egov-user feature
 """
 from resources import utils
-from Payload.egov_user import oauth_token
+from payload.egov_user import oauth_token
 
 @given('Prepare login payload with "{constants_key}" constants')
 def step_impl(context, constants_key):
