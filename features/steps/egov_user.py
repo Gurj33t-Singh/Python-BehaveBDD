@@ -4,23 +4,20 @@ egov-user feature
 from resources import utils
 from payload.egov_user import oauth_token
 
-@given('Prepare login payload with "{constants_key}" constants')
-def step_impl(context, constants_key):
+@given('Create login payload with "{key}" credentials')
+def step_impl(context, key):
     """
     Prepares egov-user oauth payload with constants value
     """
     # Prepared body with dataclass
-    context.dataclass_body=oauth_token.AuthPayload(
-        username=context.constants_dict[constants_key]['username'],
-        password=context.constants_dict[constants_key]['password'],
-        tenantId=context.constants_dict[constants_key]['tenantId'],
-        userType=context.constants_dict[constants_key]['userType'],
+    context.body=oauth_token.AuthPayload(
+        username=context.env_config[key]['username'],
+        password=context.env_config[key]['password'],
+        userType=context.env_config[key]['type'],
         grant_type='password',
-        scope='read'
-    )
+        scope='read',
+        tenantId=context.state_code + '.' + context.city_code
+    ).__dict__ # converted to dictionary
 
     # Converted body to multipart
-    context.multipart_body=utils.multipart_encode(context.dataclass_body.__dict__)
-
-    context.req_header={}
-    context.req_param={}
+    context.body=utils.multipart_encode(context.body)

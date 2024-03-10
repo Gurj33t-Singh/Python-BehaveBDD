@@ -11,21 +11,29 @@ class RequestBuilder:
     RequestBuilder DocString
     """
 
-    ini_conf=utils.get_ini_config('env.ini')
+    env_config=utils.get_json('config.json')['Environment']
     url: str
-    body={}
+    body: dict
     headers: dict
     params: dict
 
     def __init__(self):
-        self.url=self.ini_conf['ENV']['host']
+        self.url=self.env_config.get('host')
+        self.headers={}
+        self.params={}
 
-    def set_body(self, json_file_path):
+    def set_body(self, **kwargs):
         """
         gets json file from path
         stores json as dict obj
         """
-        self.body=utils.get_json(json_file_path)
+        if kwargs['json_path'] in kwargs:
+            self.body=utils.get_json(kwargs['json_path'])
+        elif kwargs['dataclass_obj'] in kwargs:
+            self.body=kwargs['dataclass_obj'].__dict__
+        elif kwargs['multipart_obj'] in kwargs:
+            self.body=kwargs['multipart_obj']
+
 
     def set_body_dataclass(self, dataclass_obj):
         """

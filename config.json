@@ -1,0 +1,29 @@
+{
+    "Environment": {
+      "host": "https://upyog-sandbox.niua.org",
+      "localhost": "http://localhost:8082/",
+      "stateCode": "pg",
+      "cityCode": "citya"
+    },
+    "Citizen": {
+        "username": "8080808000",
+        "password": "123456",
+        "type": "CITIZEN"
+    },
+    "alternateCitizen": {
+        "username": 8080808000,
+        "password": 123456,
+        "type": "CITIZEN"
+    },
+    "citizenArchitect": {
+        "username": 8080808000,
+        "password": 123456,
+        "type": "CITIZEN"
+    },
+    "Superuser": {
+        "username": "EMPAUTO",
+        "password": 123456,
+        "type": "CITIZEN"
+    }
+    
+}

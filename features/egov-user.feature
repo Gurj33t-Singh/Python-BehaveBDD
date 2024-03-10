@@ -1,12 +1,14 @@
 Feature: egov-user service
     
     Background: 
-        Given Read constants "constants/egov-user.json"
-        And Request object is ready
+        # read configs
+        Given Read config "config.json"
+        # And Read API ""
+        And Read constants "constants/egov-user.json"
 
     @static
     Scenario: Verify Login API 
-        Given Prepare login payload with "credentials" constants
+        Given Create login payload with "Citizen" credentials
         And Prepare request headers with "headers" constants
-        When Execute "post" request for "/user/oauth/token" wiht multipart payload
+        When Execute "post" request for "/user/oauth/token"
         Then Response code "200"

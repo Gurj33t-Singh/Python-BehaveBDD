@@ -1,47 +1,63 @@
 """
 methods common among all modules
 """
+import requests
+import requests_toolbelt
 from resources import utils
 from resources.req_utils import RequestBuilder
 
+@given(u'Read config "{file_path}"')
+def step_impl(context, file_path):
+    """
+    gets json file as dictionary
+    """
+    context.env_config=utils.get_json(file_path)
 
-@given(u'Request object is ready')
-def step_impl(context):
-    """
-    create RequestBuilder object
-    """
-    context.req=RequestBuilder()
+    context.host=context.env_config['Environment']['host']
+    context.localhost=context.env_config['Environment']['localhost']
+    context.state_code=context.env_config['Environment']['stateCode']
+    context.city_code=context.env_config['Environment']['cityCode']
 
-@given('Read constants "{constants_path}"')
-def step_impl(context, constants_path):
+@given(u'Read API "{file_path}"')
+def step_impl(context, file_path):
     """
-    gets constants json file as dictionary
+    gets json file as dictionary
     """
-    context.constants_dict=utils.get_json(constants_path)
+    context.api_config=utils.get_json(file_path)
 
-@given(u'Prepare request headers with "{constants_key}" constants')
-def step_impl(context, constants_key):
+@given(u'Read constants "{file_path}"')
+def step_impl(context,file_path):
+    context.constants=utils.get_json(file_path)
+
+@given(u'Prepare request headers with "{key}" constants')
+def step_impl(context, key):
      # Prepared headers
-    context.req_header=context.constants_dict[constants_key]
+    context.headers=context.constants[key]
 
-@given(u'Prepare request params with "{constants_key}" constants')
-def step_impl(context, constants_key):
+@given(u'Prepare request params with "{key}" constants')
+def step_impl(context, key):
     # Prepared params
-    context.req_param=context.constants_dict[constants_key]
+    context.params=context.constants[key]
 
 @when('Execute "{method}" request for "{endpoint}"')
 def step_impl(context, method, endpoint):
-    context.response=context.req.call_api(method=method, url=context.req.url,
-                                        api=endpoint, headers=context.req_header,
-                                        params=context.req_param, data=context.payload_string)
+    
+    context.req=RequestBuilder()
 
-@when('Execute "{method}" request for "{endpoint}" wiht multipart payload')
-def step_impl(context, method, endpoint):
-    # Added multipart header
-    context.req_header['content-type']=context.multipart_body.content_type
-    context.response=context.req.call_api(method=method, url=context.req.url,
-                                        api=endpoint, headers=context.req_header, 
-                                        params=context.req_param, data=context.multipart_body)
+    if not hasattr(context, 'headers'):
+        context.headers={}
+
+    if not hasattr(context, 'params'):
+        context.params={}
+    
+    if isinstance(context.body, requests_toolbelt.multipart.encoder.MultipartEncoder):        
+        context.headers['content-type']=context.body.content_type
+        
+    context.req.set_headers(context.headers)
+    context.req.set_params(context.params)
+    context.response=context.req.call_api(method=method, url=context.host,
+                                            api=endpoint, headers=context.req.headers,
+                                            params=context.req.params, data=context.body)
 
 @then('Response code "{resCode:d}"')
 def step_impl(context, resCode):

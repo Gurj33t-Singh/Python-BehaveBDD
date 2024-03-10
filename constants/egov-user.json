@@ -3,10 +3,10 @@
         "authorization": "Basic ZWdvdi11c2VyLWNsaWVudDo="
     },
     "credentials": {
-        "username": "MDMSAD2",
-        "password": "upyogTest@123",
+        "username": "8080808000",
+        "password": "123456",
         "tenantId": "pg",
-        "userType": "EMPLOYEE"
+        "userType": "CITIZEN"
     },
     "errors": {
         "error_codes": {
