@@ -23,4 +23,4 @@ COPY jenkins_job.xml /usr/local/jenkins/jenkins_job.xml
 RUN /usr/local/miniconda3/bin/conda env create -f /usr/local/jenkins/conda_env.yml
 
 # Start Jenkins
-CMD ["/sbin/tini", "--", "/usr/local/bin/jenkins.sh"]
+ENTRYPOINT ["/usr/local/bin/jenkins.sh"]
