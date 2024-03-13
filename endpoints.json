@@ -1,0 +1,5 @@
+{
+    "authToken": {
+        "oauth": "/user/oauth/token"
+    }
+}

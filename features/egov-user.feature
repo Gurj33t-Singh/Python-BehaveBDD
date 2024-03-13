@@ -1,14 +1,12 @@
 Feature: egov-user service
     
-    Background: 
-        # read configs
-        Given Read config "config.json"
-        # And Read API ""
-        And Read constants "constants/egov-user.json"
+    Background:
+        Given Read constants from "constants/egov-user.json"
+        And Read endpoints of "authToken"
 
     @static
     Scenario: Verify Login API 
         Given Create login payload with "Citizen" credentials
         And Prepare request headers with "headers" constants
-        When Execute "post" request for "/user/oauth/token"
+        When Execute "post" request for "oauth" api
         Then Response code "200"

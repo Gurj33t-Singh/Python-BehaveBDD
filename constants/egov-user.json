@@ -2,12 +2,6 @@
     "headers": {
         "authorization": "Basic ZWdvdi11c2VyLWNsaWVudDo="
     },
-    "credentials": {
-        "username": "8080808000",
-        "password": "123456",
-        "tenantId": "pg",
-        "userType": "CITIZEN"
-    },
     "errors": {
         "error_codes": {
             "invalidCredentials": ""

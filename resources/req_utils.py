@@ -11,7 +11,7 @@ class RequestBuilder:
     RequestBuilder DocString
     """
 
-    env_config=utils.get_json('config.json')['Environment']
+    env_config=utils.get_json('env_config.json')['Environment']
     url: str
     body: dict
     headers: dict

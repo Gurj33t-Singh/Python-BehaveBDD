@@ -11,13 +11,11 @@ def step_impl(context, key):
     """
     # Prepared body with dataclass
     context.body=oauth_token.AuthPayload(
-        username=context.env_config[key]['username'],
-        password=context.env_config[key]['password'],
-        userType=context.env_config[key]['type'],
-        grant_type='password',
-        scope='read',
-        tenantId=context.state_code + '.' + context.city_code
-    ).__dict__ # converted to dictionary
+                                        username=context.env_config[key]['username'],
+                                        password=context.env_config[key]['password'],
+                                        userType=context.env_config[key]['type'],
+                                        tenantId=context.state_code + '.' + context.city_code
+                                    ).__dict__ # converted to dictionary
 
     # Converted body to multipart
     context.body=utils.multipart_encode(context.body)
