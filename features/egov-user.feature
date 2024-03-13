@@ -4,7 +4,7 @@ Feature: egov-user service
         Given Read constants from "constants/egov-user.json"
         And Read endpoints of "authToken"
 
-    @static
+    @all @loginCitizenSuccess
     Scenario: Verify Login API 
         Given Create login payload with "Citizen" credentials
         And Prepare request headers with "headers" constants
