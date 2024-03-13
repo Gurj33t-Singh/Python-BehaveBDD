@@ -1,22 +1,9 @@
 """
 methods common among all modules
 """
-import requests
 import requests_toolbelt
 from resources import utils
 from resources.req_utils import RequestBuilder
-
-@given(u'Read config "{file_path}"')
-def step_impl(context, file_path):
-    """
-    gets json file as dictionary
-    """
-    context.env_config=utils.get_json(file_path)
-
-    context.host=context.env_config['Environment']['host']
-    context.localhost=context.env_config['Environment']['localhost']
-    context.state_code=context.env_config['Environment']['stateCode']
-    context.city_code=context.env_config['Environment']['cityCode']
 
 @given(u'Read constants from "{file_path}"')
 def step_impl(context,file_path):
@@ -27,7 +14,7 @@ def step_impl(context, key):
     """
     gets module specific API dictionary from endpoints_json file
     """
-    context.endpoints=context.endpoints_json.get(key)
+    context.endpoints=context.endpoints_json[key]
 
 @given(u'Prepare request headers with "{key}" constants')
 def step_impl(context, key):
@@ -55,7 +42,7 @@ def step_impl(context, method, api_key):
         context.headers['content-type']=context.body.content_type
 
     # get specific api from endpoints of current module 
-    context.api=context.endpoints.get(api_key)
+    context.api=context.endpoints[api_key]
     
     # Create a RequestBuilder object to assign headers and params 
     context.req=RequestBuilder()
@@ -65,7 +52,3 @@ def step_impl(context, method, api_key):
     context.response=context.req.call_api(method=method, url=context.host,
                                             api=context.api, headers=context.req.headers,
                                             params=context.req.params, data=context.body)
-
-@then('Response code "{resCode:d}"')
-def step_impl(context, resCode):
-    assert context.response.status_code==resCode
