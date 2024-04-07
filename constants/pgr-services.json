@@ -1,8 +1,4 @@
 {
-    "payload": {
-        "codes": ["TEST"],
-        "tenantId": "PTSU"
-    },
     "errors": {
         "error_codes": {
             "invalidCredentials": ""

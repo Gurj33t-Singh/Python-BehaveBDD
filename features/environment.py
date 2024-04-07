@@ -10,6 +10,7 @@ def before_all(context):
     context.localhost=context.env_config['Environment']['localhost']
     context.state_code=context.env_config['Environment']['stateCode']
     context.city_code=context.env_config['Environment']['cityCode']
+    context.auth_header=context.env_config['Environment']['auth_header']
 
     """
     gets endpoints json file as dictionary

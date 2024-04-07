@@ -61,24 +61,32 @@ class RequestBuilder:
             method (str): post/get
             api (str): api endpoint
             url (str): Base url
-        Optional Args:
             headers (dict): Headers
             params (dict): Query parameters
-            data (json str): Request body (json.dumps())
+        Optional Args:
+            data : multipart body
+            json : json body
         Returns:
             raw_response (requests obj): Raw response
         """
         if method=='post':
-            raw_response=requests.post(url=url+api,
-                                        headers=kwargs['headers'],
-                                        params=kwargs['params'],
-                                        data=kwargs['data'],
-                                        timeout=10)
+            if 'data' in kwargs:
+                raw_response=requests.post(url=url+api,
+                                            headers=kwargs['headers'],
+                                            params=kwargs['params'],
+                                            data=kwargs['data'],
+                                            timeout=10)
+            elif 'json' in kwargs:
+                raw_response=requests.post(url=url+api,
+                                            headers=kwargs['headers'],
+                                            params=kwargs['params'],
+                                            json=kwargs['json'],
+                                            timeout=10)
 
         if method=='get':
             raw_response=requests.get(url=url+api,
-                                        headers=kwargs['Headers'],
-                                        params=kwargs['Params'],
+                                        headers=kwargs['headers'],
+                                        params=kwargs['params'],
                                         timeout=10)
         
         return raw_response
