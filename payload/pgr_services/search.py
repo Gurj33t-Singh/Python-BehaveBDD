@@ -29,11 +29,11 @@ class RequestInfo:
     userInfo: UserInfo
 
 @dataclass
-class PGR_Search:
+class Payload:
     RequestInfo: RequestInfo
     msgId: str
 
 @dataclass
-class PGR_Search_params:
+class PGR_search_params:
     tenantId: str
     serviceRequestId: str
