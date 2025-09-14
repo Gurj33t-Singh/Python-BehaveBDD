@@ -1,0 +1,32 @@
+{
+    "Environment": {
+      "host": "https://xyz.demo.org",
+      "localhost": "http://localhost:8082/",
+      "stateCode": "pg",
+      "cityCode": "citya",
+      "auth_header": {
+        "authorization": "{auth_header}"
+      }
+    },
+    "Citizen": {
+        "username": "{username}",
+        "password": "{password}",
+        "type": "CITIZEN"
+    },
+    "alternateCitizen": {
+        "username": "{username}",
+        "password": "{password}",
+        "type": "CITIZEN"
+    },
+    "citizenArchitect": {
+        "username": "{username}",
+        "password": "{password}",
+        "type": "CITIZEN"
+    },
+    "Superuser": {
+        "username": "{username}",
+        "password": "{password}",
+        "type": "EMPLOYEE"
+    }
+    
+}

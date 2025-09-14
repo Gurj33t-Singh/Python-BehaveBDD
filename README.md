@@ -44,6 +44,10 @@ when storing payload, use following variable names with 'context.' prefix
 
 ## Conda dependancy: 
 install miniconda3 or anaconda environment manager
-`conda env create --file=CondaEnv.yaml` to create conda environment from CondaEnv.yml of this project
+`conda env create --file=conda_env.yaml` to create conda environment from conda_env.yml of this project
 `--name myEnv` add this flag to set your own environment name 
 `conda activate egov` to activate this environment
+
+## Jenkins job setup:
+- Export job: `java -jar jenkins-cli.jar -s http://JENKINS_USER:JENKINS_PASSWORD@JENKINS_IP:JENKINS_PORT get-job sampleJob > sampleJob.xml`
+- Import job: `java -jar jenkins-cli.jar -s http://JENKINS_USER:JENKINS_PASSWORD@JENKINS_IP:JENKINS_PORT create-job sampleJob < sampleJob.xml`

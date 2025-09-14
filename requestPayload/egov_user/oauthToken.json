@@ -1,8 +1,0 @@
-{
-    "username": "{username}",
-    "password": "{password}",
-    "grant_type": "password",
-    "scope": "read",
-    "tenantId": "pg",
-    "userType": "EMPLOYEE"
-}

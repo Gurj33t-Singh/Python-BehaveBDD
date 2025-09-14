@@ -1,38 +1,42 @@
+"""
+methods:
+    get_json
+    multipath_encode
+    get_ini_config
+"""
 import json
-import requests_toolbelt
 from configparser import ConfigParser
 
-def getJson(PATH):
+import requests_toolbelt
+
+def get_json(path):
     """ 
-    Takes JSON file from PATH and converts on Dict obj
-    args: PATH(str)
+    Takes JSON file from path and converts on Dict obj
+    args: path(str)
     returns: Dictionary Obj
     dependancy: import json 
-    """ 
-    with open(PATH) as payload_file:
+    """
+    with open(path) as payload_file:
         return json.load(payload_file)
 
 
-def multiPartEnc(DICT):
+def multipart_encode(dict_obj):
     """ 
     Takes body dictionary and encodes as multipart obj
-    args: DICT(Dictionary)
+    args: dict_obj(Dictionary)
     returns: MultipartEncoder obj 
     dependacy: from requests_toolbelt import MultipartEncoder 
     """
-    return requests_toolbelt.MultipartEncoder(fields=DICT)
+    return requests_toolbelt.MultipartEncoder(fields=dict_obj)
 
 
-def getIniConfig(PATH):
+def get_ini_config(path):
     """ 
     Takes .ini file path and returns config object
-    args: PATH(str)
+    args: path(str)
     returns: ConfigParser obj 
     dependacy: from configparser import ConfigParser 
     """
     configs=ConfigParser()
-    configs.read(PATH)
+    configs.read(path)
     return configs
-
-
-

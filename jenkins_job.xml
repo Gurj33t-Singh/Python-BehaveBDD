@@ -1,0 +1,93 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>-1</daysToKeep>
+        <numToKeep>2</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.38.0">
+      <projectUrl>https://github.com/Gurj33t-Singh/eGovDigit/</projectUrl>
+      <displayName>Git Personal</displayName>
+    </com.coravy.hudson.plugins.github.GithubProjectProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.FileParameterDefinition>
+          <name>./env_config.json</name>
+          <description>config file (optional)</description>
+        </hudson.model.FileParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>tags</name>
+          <description>Comma separated tags</description>
+          <defaultValue>all</defaultValue>
+          <trim>true</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>Feature_File</name>
+          <description>feature file name (eg: egov-user.feature)</description>
+          <trim>true</trim>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@5.2.1">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>https://github.com/Gurj33t-Singh/eGovDigit.git</url>
+        <credentialsId>git_personal</credentialsId>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/patch_1</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="empty-list"/>
+    <extensions/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>~/miniconda3/bin/activate egov
+~/miniconda3/envs/egov/bin/behave ./features/$Feature_File --tags=$tags --no-capture -f allure_behave.formatter:AllureFormatter -o ./reports</command>
+      <configuredLocalRules/>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <ru.yandex.qatools.allure.jenkins.AllureReportPublisher plugin="allure-jenkins-plugin@2.31.1">
+      <configPath></configPath>
+      <jdk></jdk>
+      <properties/>
+      <results>
+        <ru.yandex.qatools.allure.jenkins.config.ResultsConfig>
+          <path>reports</path>
+        </ru.yandex.qatools.allure.jenkins.config.ResultsConfig>
+      </results>
+      <reportBuildPolicy>ALWAYS</reportBuildPolicy>
+      <includeProperties>false</includeProperties>
+      <disabled>false</disabled>
+      <report>allure-report</report>
+    </ru.yandex.qatools.allure.jenkins.AllureReportPublisher>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.45">
+      <deleteDirs>false</deleteDirs>
+      <cleanupParameter></cleanupParameter>
+      <externalDelete></externalDelete>
+      <disableDeferredWipeout>false</disableDeferredWipeout>
+    </hudson.plugins.ws__cleanup.PreBuildCleanup>
+  </buildWrappers>
+</project>

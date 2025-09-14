@@ -2,18 +2,14 @@
     "headers": {
         "authorization": "{auth_header}"
     },
-    "credentials": {
-        "username": "{username}",
-        "password": "{password}",
-        "tenantId": "pg",
-        "userType": "EMPLOYEE"
-    },
     "errors": {
         "error_codes": {
-            "invalidCredentials": ""
+            "invalidCredentials": "invalid_request",
+            "invalid_request": "invalid_request"
         },
         "error_messages": {
-            "invalidCredentials": ""
+            "invalidCredentials": "Invalid login credentials",
+            "invalid_request": "User Type is mandatory and has to be a valid type"
         }
     }
 }
