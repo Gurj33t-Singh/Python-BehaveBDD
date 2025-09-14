@@ -1,10 +1,10 @@
 {
     "headers": {
-        "authorization": "Basic ZWdvdi11c2VyLWNsaWVudDo="
+        "authorization": "{auth_header}"
     },
     "credentials": {
-        "username": "MDMSAD2",
-        "password": "upyogTest@123",
+        "username": "{username}",
+        "password": "{password}",
         "tenantId": "pg",
         "userType": "EMPLOYEE"
     },

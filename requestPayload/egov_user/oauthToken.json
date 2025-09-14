@@ -1,6 +1,6 @@
 {
-    "username": "MDMSAD2",
-    "password": "upyogTest@123",
+    "username": "{username}",
+    "password": "{password}",
     "grant_type": "password",
     "scope": "read",
     "tenantId": "pg",
